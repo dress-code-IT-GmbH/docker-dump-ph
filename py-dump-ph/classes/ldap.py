@@ -59,7 +59,7 @@ class Ldap(object):
             letters = ascii_lowercase
 
             for c1 in letters :
-                print("now : {}* seen: {} records".format(c1,count))
+                print("seen {} records. next: {}*".format(count,c1))
                 for c2 in letters:
                     for c3 in letters:
                         for c4 in letters:
