@@ -1,0 +1,17 @@
+[MyAD]
+Host: MYAD-NAME.example.com:Port
+
+# File with PEM-Certificates. Or: CacertPath, which would be a openssl-hashed directory
+CacertFile: certs/my_ca_root.pem
+
+# Additional names, used in cert verification
+AltNames: *.example.com, foobar.example.com
+
+AdminUser: myad\Administrator
+AdminPw: a_very_secret_admin_password
+
+BaseDn: DC=myad,DC=emp,DC=example,DC=com
+
+Filter: (&(objectclass=person)(sn=Foobar))
+
+#VerifySSL=No # switch off certificate verification
