@@ -59,41 +59,40 @@ class Ldap(object):
             letters = ascii_lowercase
 
             for c1 in letters :
-                print("seen {} records. next: {}*".format(count,c1))
                 for c2 in letters:
+                    print("seen {} records. next: {}*".format(count, c1+c2))
                     for c3 in letters:
-                        for c4 in letters:
-                            partkey = "{}{}{}{}".format(c1,c2,c3,c4)
-                            filter = "(&{}(cn={}*))".format(f, partkey)
-                            #print(filter)
-                            result = self.connection.search(
-                                search_base=dn,
-                                search_filter=filter,
-                                dereference_aliases=ldap3.DEREF_NEVER,
-                                search_scope=ldap3.SUBTREE,
-                                attributes=['*']
-                            )
-                            cr = self.connection.result
-                            if (cr['result'] != 0):
-                                print ("WARNING: {} on {}".format(cr['description'],filter))
+                        partkey = "{}{}{}".format(c1,c2,c3)
+                        filter = "(&{}(cn={}*))".format(f, partkey)
+                        #print(filter)
+                        result = self.connection.search(
+                            search_base=dn,
+                            search_filter=filter,
+                            dereference_aliases=ldap3.DEREF_NEVER,
+                            search_scope=ldap3.SUBTREE,
+                            attributes=['*']
+                        )
+                        cr = self.connection.result
+                        if (cr['result'] != 0):
+                            print ("WARNING: {} on {}".format(cr['description'],filter))
 
-                            for entry in self.connection.entries:
-                                edict = {
-                                    'dn': entry.entry_dn,
-                                    'raw_attributes': entry.entry_raw_attributes,
-                                }
-                                all_entries.append(edict)
-                                count +=1
+                        for entry in self.connection.entries:
+                            edict = {
+                                'dn': entry.entry_dn,
+                                'raw_attributes': entry.entry_raw_attributes,
+                            }
+                            all_entries.append(edict)
+                            count +=1
 
-                        if count > written_entries:
-                            ldif = search_response_to_ldif(all_entries, all_base64=False, sort_order=None)
-                            ldif.pop()
-                            output_file = open(self.config.cmdline_args.output, 'a')
-                            for l in ldif:
-                                output_file.write(l + "\n")
-                            output_file.close()
-                            all_entries = list()
-                            written_entries = count
+                    if count > written_entries:
+                        ldif = search_response_to_ldif(all_entries, all_base64=False, sort_order=None)
+                        ldif.pop()
+                        output_file = open(self.config.cmdline_args.output, 'a')
+                        for l in ldif:
+                            output_file.write(l + "\n")
+                        output_file.close()
+                        all_entries = list()
+                        written_entries = count
 
                 #ldif = entry.entry_to_ldif(stream=output_file)
 
