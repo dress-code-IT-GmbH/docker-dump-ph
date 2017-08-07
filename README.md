@@ -1,7 +1,11 @@
 # dump ph
 
-this scripts implements a pretty ugly way to remotely dump entries from a server,
+this scripts implements a pretty ugly way to remotely dump some person entries from a server,
 that does not support better ways.
+
+# IMPORTANT WARNING: THIS IS NOT A BACKUP
+
+this script might not get all entries! It will just get "almost all".
 
 ## Configuration and running
 

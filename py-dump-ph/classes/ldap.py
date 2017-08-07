@@ -56,7 +56,7 @@ class Ldap(object):
         written_entries = 0
         try:
 
-            letters = ascii_lowercase + digits + " " + "äöüß"
+            letters = ascii_lowercase
 
             for c1 in letters :
                 print("now : {}* seen: {} records".format(c1,count))
