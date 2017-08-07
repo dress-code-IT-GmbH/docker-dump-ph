@@ -30,10 +30,11 @@ COPY startup.py /bin/startup
 RUN chmod a+x /bin/startup
 RUN chmod a+x /opt/bin/*.py
 
+COPY secret/dump.conf /var/data/dump.conf
+COPY secret/certificates.pem /var/data
+
 VOLUME /var/data
 
-COPY secret/dump.conf /var/data/dump.conf
-copy secret/certificates.pem /var/data
 
 #ENTRYPOINT [ "/bin/startup" ]
 CMD [ "/bin/startup" ]
