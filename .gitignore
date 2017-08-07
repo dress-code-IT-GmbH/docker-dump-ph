@@ -101,3 +101,7 @@ ENV/
 
 secret/
 /ldap.log
+
+conf??.sh
+
+*.swp

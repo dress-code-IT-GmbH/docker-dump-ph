@@ -96,7 +96,7 @@ class Config(object):
             help='selects the dump in case more than one dump is defined in the config file')
         self.parser.add_argument('-l', '--log', dest='log', action='store_true',
             help='write a ldap log to the file "ldap.log"')
-        self.parser.add_argument('-o', '--output', dest='output', action='store_true',
+        self.parser.add_argument('-o', '--output', dest='output', 
                                  help='output file', default='data.ldif')
         self.parser.set_defaults(log=False)
  
